@@ -18,7 +18,5 @@ public class UserController {
 	
 	@RequestMapping(value="/" , method=RequestMethod.GET)
 	public void getTest(){
-		System.out.println("hihihihi");
-		userDAO.test();
 	}
 }

@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="verb">
- 
+		
+	<!-- 동사 입력 -->
+	<insert id="insertVerb" parameterType="HashMap">
+		INSERT INTO TB_VERB(
+			content
+		   ,img_src
+		   ,gubun
+		) VALUES(
+			${content}
+		   ,${imgSrc}
+		   ,${gubun}
+		)
+	</insert>	
+	
+	<!-- 전체 동사 목록 가져오기 -->	
+	<select id="selectVerbList">
+		SELECT verb_seq
+		      ,content
+		      ,img_src
+		      ,gubun
+		  FROM TB_VERB
+	</select>
  
 </mapper>
 

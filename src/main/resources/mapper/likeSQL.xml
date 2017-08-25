@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="like">
- 
- 
+
+	<!-- 찜 하기 -->
+	<insert id="insertLike" parameterType="HashMap">
+		INSERT INTO TB_LIKE(
+		    user_seq
+		   ,pic_seq
+		   ,reg_date
+		) VALUES(
+		   ${userSeq}
+		  ,${picSeq}
+		  ,NOW()
+		)
+	</insert>
+	
+	<!-- 찜 취소 하기 -->
+ 	<delete id="deleteLike" parameterType="String">
+ 		DELETE FROM TB_LIKE
+ 		 WHERE like_seq = ${likeSeq}
+ 	</delete>
 </mapper>
 
 

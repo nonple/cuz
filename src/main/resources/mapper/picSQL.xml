@@ -2,7 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pic">
  
- 
+	<!-- 픽토그램 만들기 -->
+	<insert id="insertPic" parameterType="HashMap">
+		INSERT INTO TB_PIC(
+			content
+		   ,user_seq
+		   ,view
+		   ,reg_date
+		) VALUES(
+			${content}
+		   ,${userSeq}
+		   ,0
+		   ,NOW()
+		)
+	</insert>
+	
+	<!-- 내가 만든 픽토그램 조회 -->
+	<select id="selectMyPicList" parameterType="String">
+		SELECT pic_seq
+		      ,content
+			  ,view
+			  ,reg_date		     
+	      FROM TB_PIC
+	     WHERE user_seq = ${userSeq}
+	       AND del_yn = 'N'
+	</select>
+	
+	<!-- 픽토그램 삭제하기 -->
+	<update id="deletePic" parameterType="String">
+		UPDATE TB_PIC
+		   SET del_yn = 'Y'
+		 WHERE pic_seq = ${picSeq}
+	</update>
+	
+	<!-- 픽토그램 수정하기 -->
+	<update id="updatePic" parameterType="HashMap">
+		UPDATE TB_PIC
+		   SET content = ${content}
+		 WHERE pic_seq = ${picSeq}
+	</update>
+	
+	<!-- 픽토그램 검색하기 -->
+	<select id="selectPicSearch" parameterType="String">
+		SELECT pic_seq
+		      ,content
+		      ,user_seq
+		      ,view
+		      ,reg_date
+		  FROM TB_PIC
+		 WHERE content LIKE '%${content}%' 
+		   AND del_yn = 'N'
+	</select>
+	
+	
 </mapper>
 
 
